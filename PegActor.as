@@ -1,4 +1,4 @@
-package  
+package
 {
 	import Box2D.Collision.Shapes.b2CircleDef;
 	import Box2D.Common.Math.b2Vec2;
@@ -19,7 +19,7 @@ package
 		private var pegMovie:MovieClip;
 		private var pegBody:b2Body;
 		
-		public function PegActor(parent:DisplayObjectContainer, location:Point, initVel:b2Vec2) 
+		public function PegActor(parent:DisplayObjectContainer, location:Point, initVel:b2Vec2)
 		{
 			_beenHit = false;
 			
@@ -48,7 +48,7 @@ package
 			setMyMovieFrame();
 		}
 		
-		override protected function childSpecificUpdating():void 
+		override protected function childSpecificUpdating():void
 		{
 			pegMovie.rotation = Angle(pegBody.GetLinearVelocity()) / PhysiVals.deg2rad;
 			super.childSpecificUpdating();

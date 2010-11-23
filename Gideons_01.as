@@ -1,4 +1,4 @@
-package  
+package
 {
 	import Box2D.Collision.b2AABB;
 	import Box2D.Collision.Shapes.b2CircleDef;
@@ -23,12 +23,13 @@ package
 		static var _player:PlayerActor;
 		static var _mouseX:Number = 0;
 		static var _mouseY:Number = 0;
-		static var _platform:Sprite;
+		//static var _platform:Sprite;
+        static var _root:Sprite;
 		private var timeElapsed:Number;
 		
-		public function Gideons_01() 
+		public function Gideons_01()
 		{
-			_platform = platform;
+			_root = root1;
 			_allActors = [];
 			setupPhysicsWorld();
 			makePlayer();
@@ -58,32 +59,38 @@ package
 			PhysiVals.world.SetDebugDraw(artistForHire);
 		}
 		
-		private function newFrame(e:Event):void 
+		private function newFrame(e:Event):void
 		{
-			PhysiVals.world.Step(1 / PhysiVals.frameR, 10);
-			for each (var actor:Actor in _allActors) {
-				actor.updateNow();
-			}
-			
-			reallyRemoveActors();
-			_mouseX = root.mouseX;
-			_mouseY = root.mouseY;
-			timeElapsed += 1 / 60;
-			
-			var _enemy:PlayerActor;
-			if (timeElapsed > 2) {
-				_enemy = new PlayerActor(this, new Point(1200, 10), new EnemyClip());
-				_enemy.addEventListener(PlayerEvent.BALL_OFF_SCREEN, playerOffScreen_h);
-				_allActors.push(_enemy);
-				timeElapsed = 0;
-			}
+            try{
+                PhysiVals.world.Step(1 / PhysiVals.frameR, 10);
+                for each (var actor:Actor in _allActors) {
+                    actor.updateNow();
+                }
+
+                reallyRemoveActors();
+                _mouseX = root.mouseX;
+                _mouseY = root.mouseY;
+                timeElapsed += 1 / 60;
+
+                var _enemy:PlayerActor;
+                if (timeElapsed > 2) {
+                    _enemy = new PlayerActor(this, new Point(1200, 10), new EnemyClip());
+                    _enemy.addEventListener(PlayerEvent.BALL_OFF_SCREEN, playerOffScreen_h);
+                    _allActors.push(_enemy);
+                    timeElapsed = 0;
+                }
+            }
+            catch (e:Error) {
+                trace(e.getStackTrace());
+
+            }
 		}
 		
 		private function reallyRemoveActors():void
 		{
 			var i:int = 0;
 			for each (var removeMe:Actor in _actorsToRemove) {
-				trace(removeMe._body);
+				//trace(removeMe._body);
 				if (removeMe._body != null && removeMe._costume != null) {
 					removeMe.destroy();
 				}
@@ -112,7 +119,7 @@ package
 			
 		}
 		
-		private function playerOffScreen_h(e:PlayerEvent):void 
+		private function playerOffScreen_h(e:PlayerEvent):void
 		{
 			//trace("player off screen");
 			var playerToRemove:PlayerActor = PlayerActor(e.currentTarget);
@@ -122,7 +129,8 @@ package
 		
 		private function createLevel():void
 		{
-			var platform:Platforms = new Platforms(this);
+			//var root:Root = new Root(this);
+            trace(_root.getChildByName("platform"));// = new Platforms(_root);
 		}
 		
 		private function setupPhysicsWorld():void

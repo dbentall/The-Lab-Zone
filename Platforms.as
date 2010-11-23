@@ -1,4 +1,4 @@
-package  
+package
 {
 	import Box2D.Collision.Shapes.b2PolygonDef;
 	import Box2D.Collision.Shapes.b2ShapeDef;
@@ -13,8 +13,8 @@ package
 	public class Platforms extends Actor
 	{
 		
-		public function Platforms(parent:DisplayObjectContainer) 
-		{			
+		public function Platforms(parent:DisplayObjectContainer)
+		{
 			var platform:Sprite = Gideons_01._platform;
 			var platformShapeDef:b2PolygonDef = new b2PolygonDef();
 			platformShapeDef.SetAsBox(platform.width / 2 / PhysiVals.met2pix, platform.height / 2 / PhysiVals.met2pix);
@@ -54,7 +54,7 @@ package
 			
 		}
 		
-		override protected function updateMyLook():void 
+		override protected function updateMyLook():void
 		{
 			
 		}

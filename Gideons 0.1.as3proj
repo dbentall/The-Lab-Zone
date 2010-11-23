@@ -14,7 +14,7 @@
   <!-- Other classes to be compiled into your SWF -->
   <classpaths>
     <class path="." />
-    <class path="..\..\..\..\..\FlashUtilities\Box2D_2.0" />
+    <class path="..\..\..\..\..\FlashUtilities\Box2D_2.0\Box2D" />
   </classpaths>
   <!-- Build options -->
   <build>

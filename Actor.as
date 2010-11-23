@@ -1,4 +1,4 @@
-package  
+package
 {
 	import Box2D.Dynamics.b2Body;
 	import flash.display.DisplayObject;
@@ -18,7 +18,7 @@ package
 		protected var _shoot_f:Boolean = false;
 		protected var _onGround_f:Boolean = false;
 		
-		public function Actor(myBody:b2Body, myCostume:DisplayObject) 
+		public function Actor(myBody:b2Body, myCostume:DisplayObject)
 		{
 			_body = myBody;
 			_body.SetUserData(this);
@@ -39,14 +39,22 @@ package
 			//for overriding
 		}
 		
+
+        public var destroyCalled:Boolean = false;
 		public function destroy():void
 		{
+            if (destroyCalled) {
+                trace("destroyCalled twice!");
+            }
+            else{
 			//if (this._costume != null && this._body != null) {
 				cleanupBeforeRemoving();
 				_costume.parent.removeChild(_costume); //  _costume.parent.getChildByName("bin"));
 				PhysiVals.world.DestroyBody(_body);
+                destroyCalled = true;
 				//trace(this._costume);
 			//}
+            }
 		}
 		
 		private function cleanupBeforeRemoving():void {
@@ -60,27 +68,27 @@ package
 			_costume.rotation = _body.GetAngle() / PhysiVals.deg2rad;
 		}
 		
-		public function set jump_f(value:Boolean):void 
+		public function set jump_f(value:Boolean):void
 		{
 			_jump_f = value;
 		}
 		
-		public function set left_f(value:Boolean):void 
+		public function set left_f(value:Boolean):void
 		{
 			_left_f = value;
 		}
 		
-		public function set right_f(value:Boolean):void 
+		public function set right_f(value:Boolean):void
 		{
 			_right_f = value;
 		}
 		
-		public function set shoot_f(value:Boolean):void 
+		public function set shoot_f(value:Boolean):void
 		{
 			_shoot_f = value;
 		}
 		
-		public function set onGround_f(value:Boolean):void 
+		public function set onGround_f(value:Boolean):void
 		{
 			_onGround_f = value;
 		}
